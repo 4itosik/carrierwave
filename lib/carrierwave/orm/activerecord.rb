@@ -46,9 +46,10 @@ module CarrierWave
         end
 
         def remove_#{column}!
+          self.remove_#{column} = true
+          write_#{column}_identifier
+          self.remove_#{column} = false
           super
-          _mounter(:#{column}).remove = true
-          _mounter(:#{column}).write_identifier
         end
 
         def serializable_hash(options=nil)
