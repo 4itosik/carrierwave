@@ -60,7 +60,7 @@ module CarrierWave
 
           self.class.uploaders.each do |column, uploader|
             if (!only && !except) || (only && only.include?(column.to_s)) || (!only && except && !except.include?(column.to_s))
-              hash[column.to_s] = _mounter(column).uploader.serializable_hash
+              hash[column.to_s] = _mounter(column).uploaders.first.serializable_hash
             end
           end
           super(options).merge(hash)
